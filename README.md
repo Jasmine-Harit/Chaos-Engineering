@@ -22,3 +22,14 @@ Install Helm first
 - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
 - chmod 700 get_helm.sh
 - ./get_helm.sh
+For Chaos Mesh Installation
+1. Add chaos mesh repository
+- helm repo add chaos-mesh https://charts.chaos-mesh.org
+2. View the chaos mesh version
+- helm search repo chaos-mesh
+3. Now create Namespace
+- kubectl create ns chaos-testing
+4. Now use Docker to install chaos mesh(you can install it in other environments also)
+- helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version 2.1.5
+5. Verify the installation
+- kubectl get po -n chaos-testing
