@@ -33,3 +33,19 @@ For Chaos Mesh Installation
 - helm install chaos-mesh chaos-mesh/chaos-mesh -n=chaos-testing --version 2.1.5
 5. Verify the installation
 - kubectl get po -n chaos-testing
+Now check the Output, the services running in the same namespace and then open the chaos mesh dashboard(Use your Minikube IP to access the dashboard with specific port For Example:- 30972)
+After opening the Dashboard 
+1. You have to generate the token so click on generate
+2. Now, select cluster scoped and role as manager and then copy the RBAC.yaml file and apply that file in the terminal
+3. After that use the below command to get the token
+- kubectl describe secrets account-cluster-manager-kepic
+4. Now, provide your token name and copy the token and submit
+Let’s start creating the experiments
+1. Create a namespace
+- kubectl create ns test-chaos
+2. Create deployment in the namespace
+- kubectl create deployment chaos-engineering --image=redis --namespace test-chaos
+3. Scale the deployment up to 8 pods
+- kubectl scale deployment/chaos-engineering --replicas=8 --namespace test-chaos
+4. To confirm everything is up and running
+- kubectl get pods -n test-chaos
